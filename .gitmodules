@@ -1,0 +1,3 @@
+[submodule "darray"]
+	path = darray
+	url = https://github.com/zufalige-daten/darray
