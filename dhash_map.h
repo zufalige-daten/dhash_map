@@ -15,8 +15,8 @@ typedef struct{
 	size_t storage_unit;
 } dhash_map_t;
 
-#define _alwaysinline __attribute__((always_inline))
-dhash_key_t _alwaysinline _dhash_hash(const char *key_base){
+#define _alwaysinline inline __attribute__((always_inline))
+_alwaysinline dhash_key_t _dhash_hash(const char *key_base){
 	dhash_key_t hash;
 	hash = 0x811c9dc5;
 
@@ -26,7 +26,7 @@ dhash_key_t _alwaysinline _dhash_hash(const char *key_base){
 	return hash;
 }
 
-dhash_map_t * _alwaysinline dhash_new(size_t value_size){
+_alwaysinline dhash_map_t *dhash_new(size_t value_size){
 	dhash_map_t *ret;
 	darray_t *darray;
 
@@ -39,7 +39,7 @@ dhash_map_t * _alwaysinline dhash_new(size_t value_size){
 	return ret;
 }
 
-intptr_t _alwaysinline _dhash_search_for_insert(dhash_map_t **hash_map, dhash_key_t key){
+_alwaysinline intptr_t _dhash_search_for_insert(dhash_map_t **hash_map, dhash_key_t key){
 	intptr_t bottom, top, middle;
 
 	if((*hash_map)->darray->length == 0)
@@ -65,7 +65,7 @@ intptr_t _alwaysinline _dhash_search_for_insert(dhash_map_t **hash_map, dhash_ke
 	return (key > ((dhash_pairing_t *)darray_get(&((*hash_map)->darray), bottom))->key) ? (bottom + 1) : bottom;
 }
 
-intptr_t _alwaysinline _dhash_search_for_get(dhash_map_t **hash_map, dhash_key_t key){
+_alwaysinline intptr_t _dhash_search_for_get(dhash_map_t **hash_map, dhash_key_t key){
 	intptr_t bottom, top, middle;
 
 	if((*hash_map)->darray->length == 0)
@@ -91,7 +91,7 @@ intptr_t _alwaysinline _dhash_search_for_get(dhash_map_t **hash_map, dhash_key_t
 	return -1;
 }
 
-int _alwaysinline dhash_add(dhash_map_t **hash_map, const char *key_base, void *value){
+_alwaysinline int dhash_add(dhash_map_t **hash_map, const char *key_base, void *value){
 	dhash_key_t key;
 	uintptr_t index;
 	int status;
@@ -119,7 +119,7 @@ int _alwaysinline dhash_add(dhash_map_t **hash_map, const char *key_base, void *
 	return 0;
 }
 
-int _alwaysinline dhash_remove(dhash_map_t **hash_map, const char *key_base){
+_alwaysinline int dhash_remove(dhash_map_t **hash_map, const char *key_base){
 	dhash_key_t key;
 	uintptr_t index;
 	int status;
@@ -140,7 +140,7 @@ int _alwaysinline dhash_remove(dhash_map_t **hash_map, const char *key_base){
 	return 0;
 }
 
-void * _alwaysinline dhash_get(dhash_map_t **hash_map, const char *key_base){
+_alwaysinline void *dhash_get(dhash_map_t **hash_map, const char *key_base){
 	dhash_key_t key;
 	uintptr_t index;
 	int status;
@@ -165,7 +165,7 @@ void * _alwaysinline dhash_get(dhash_map_t **hash_map, const char *key_base){
 	return data;
 }
 
-int _alwaysinline dhash_set(dhash_map_t **hash_map, const char *key_base, void *value){
+_alwaysinline int dhash_set(dhash_map_t **hash_map, const char *key_base, void *value){
 	dhash_key_t key;
 	uintptr_t index;
 	int status;
@@ -193,7 +193,7 @@ int _alwaysinline dhash_set(dhash_map_t **hash_map, const char *key_base, void *
 	return 0;
 }
 
-int _alwaysinline dhash_delete(dhash_map_t **hash_map){
+_alwaysinline int dhash_delete(dhash_map_t **hash_map){
 	int status;
 
 	if(*hash_map == NULL)
