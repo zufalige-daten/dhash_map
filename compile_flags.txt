@@ -1,4 +1,4 @@
--I./include
--std=gnu23
+-I.
 -I./darray
+-std=c23
 
